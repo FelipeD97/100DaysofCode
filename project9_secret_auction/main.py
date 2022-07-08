@@ -1,3 +1,6 @@
+from logo import gavel
+
+
 def take_bid(name, bid):
     bids.append({"name": name, "bid": bid})
 
@@ -16,6 +19,9 @@ def highest_bid(bids):
 
 bids = []
 bid_active = True
+
+print(gavel)
+print("Welcome to the Secret Auction")
 
 while bid_active:
     name = input("What is your name?: ")
