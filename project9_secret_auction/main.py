@@ -1,4 +1,13 @@
 from logo import gavel
+from os import system, name
+
+
+def clear():
+
+    if name == "nt":
+        _ = system("cls")
+    else:
+        _ = system("clear")
 
 
 def take_bid(name, bid):
@@ -35,3 +44,5 @@ while bid_active:
     if more_bidders == "no":
         highest_bid(bids)
         bid_active = False
+    else:
+        clear()
