@@ -19,7 +19,6 @@
 
 ##################### Hints #####################
 
-from difflib import IS_CHARACTER_JUNK
 import random
 
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
@@ -62,13 +61,14 @@ print(computer_cards, user_cards)
 user_score = calculate_score(user_cards)
 computer_score = calculate_score(computer_cards)
 
-if user_score == 0 or user_score > 21:
+if computer_score == 0 or computer_score > 21:
     is_active = False
-elif computer_score == 0 or computer_score > 21:
+elif user_score == 0 or user_score > 21:
     is_active = False
 
 if input("Draw another card? Type 'y' for yes & 'n' for no: ") == "y":
     user_cards.append(deal_card(cards))
+
 print(calculate_score(computer_cards))
 print(computer_cards)
 print(calculate_score(user_cards))
