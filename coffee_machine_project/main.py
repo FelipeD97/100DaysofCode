@@ -1,4 +1,4 @@
-from data import resources, menu
+from data import resources, menu, coins
 
 
 def check_resources(order_ingredients):
@@ -11,12 +11,20 @@ def check_resources(order_ingredients):
     return is_enough
 
 
+def make_drink(order_ingredients):
+    for item in order_ingredients:
+        resources[item] -= order_ingredients[item]
+
+
 is_off = False
 profit = 0
+
 
 # 1) Take user drink order as an input.
 
 while not is_off:
+    user_bank = 0
+
     choice = input(
         "What would you like to drink? 'Espresso', 'Latte', or 'Cappacino': "
     ).lower()
@@ -37,4 +45,26 @@ while not is_off:
     else:
         drink = menu[choice]
         check_resources(drink["ingredients"])
-        print(drink)
+
+        if check_resources(drink["ingredients"]):
+            # 5) Process coins.
+            for key in coins:
+                number_of_coins = float(input(f"how many {key}: "))
+                total = number_of_coins * coins[key]
+                user_bank += total
+
+            # 6) Check if transaction was successful
+
+            if user_bank >= drink["cost"]:
+                profit += drink["cost"]
+                user_change = user_bank - drink["cost"]
+                user_change = float(round(user_change, 2))
+
+                if user_bank > drink["cost"]:
+                    print(f"Here is ${user_change} dollars in change.")
+
+                make_drink(drink["ingredients"])
+                print(f"Here is your {choice}. Enjoy! ")
+
+            else:
+                print("Sorry that's not enough money. Money refunded.")
