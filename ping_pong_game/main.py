@@ -1,6 +1,7 @@
 from turtle import Screen
 from paddle import Paddle
 from ball import Ball
+from scoreboard import Scoreboard
 import time
 
 screen = Screen()
@@ -10,26 +11,29 @@ screen.title("Let's Play Ping Pong!")
 screen.tracer(0)
 screen.colormode(255)
 
-player_one = Paddle()
-player_one.goto(-350, 0)
+l_paddle = Paddle()
+l_paddle.goto(-350, 0)
 
-player_two = Paddle()
-player_two.goto(350, 0)
+r_paddle = Paddle()
+r_paddle.goto(350, 0)
 
 ball = Ball()
 
+scoreboard = Scoreboard()
+
+
 screen.listen()
-screen.onkey(key="Up", fun=player_two.go_up)
-screen.onkey(key="Down", fun=player_two.go_down)
-screen.onkey(key="w", fun=player_one.go_up)
-screen.onkey(key="s", fun=player_one.go_down)
+screen.onkey(key="Up", fun=r_paddle.go_up)
+screen.onkey(key="Down", fun=r_paddle.go_down)
+screen.onkey(key="w", fun=l_paddle.go_up)
+screen.onkey(key="s", fun=l_paddle.go_down)
 
 game_is_on = True
 
 while game_is_on:
 
     screen.update()
-    time.sleep(0.1)
+    time.sleep(ball.move_speed)
 
     ball.move()
 
@@ -39,16 +43,22 @@ while game_is_on:
 
     # Detect collision with paddle
     if (
-        ball.distance(player_two) < 50
+        ball.distance(r_paddle) < 50
         and ball.xcor() > 320
-        or ball.distance(player_one) < 50
+        or ball.distance(l_paddle) < 50
         and ball.xcor() < -320
     ):
         ball.x_bounce()
 
-    # if ball.xcor() > 400 or ball.xcor() < -400:
-    #     ball.setposition(ball.xcor(), ball.ycor())
-    #     game_is_on = False
+    # Detect when right paddle misses
+    if ball.xcor() > 380:
+        ball.reset_ball()
+        scoreboard.l_point()
+
+    # Detect when left paddle misses
+    if ball.xcor() < -380:
+        ball.reset_ball()
+        scoreboard.r_point()
 
 
 screen.exitonclick()
