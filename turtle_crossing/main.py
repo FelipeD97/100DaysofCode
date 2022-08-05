@@ -10,6 +10,7 @@ screen.tracer(0)
 
 turtle = Player()
 car_manager = CarManager()
+scoreboard = Scoreboard()
 
 screen.listen()
 screen.onkey(key="Up", fun=turtle.move)
@@ -27,10 +28,15 @@ while game_is_on:
     for car in car_manager.all_cars:
         if car.distance(turtle) < 25:
             game_is_on = False
+            scoreboard.game_over()
 
     if turtle.ycor() > 280:
         turtle.next_level()
+        scoreboard.level_up()
         car_manager.level_up()
+
+screen.exitonclick()
+
 
 # Create a turtle player that starts at the bottom of the screen and listen for the "Up" keypress to move the turtle north. If you get stuck, check the video walkthrough in Step 3.
 
