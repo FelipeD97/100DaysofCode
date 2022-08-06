@@ -38,3 +38,10 @@ class Snake:
 
     def turn_right(self):
         self.head.right(90)
+
+    def reset(self):
+        for seg in self.segments:
+            seg.goto(1000, 1000)
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
