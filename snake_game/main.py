@@ -18,6 +18,7 @@ screen.listen()
 screen.onkey(key="Left", fun=snake.turn_left)
 screen.onkey(key="Right", fun=snake.turn_right)
 
+
 game_is_on = True
 
 while game_is_on:

@@ -3,12 +3,15 @@ from turtle import Turtle
 ALIGNMENT = "center"
 FONT = ("Courier", 24, "normal")
 
+with open("snake_game/highscore.txt", mode="r") as file:
+    contents = file.read()
+
 
 class Scoreboard(Turtle):
     def __init__(self):
         super().__init__()
         self.score = 0
-        self.high_score = 0
+        self.high_score = int(contents)
         self.color("white")
         self.hideturtle()
         self.penup()
@@ -24,6 +27,8 @@ class Scoreboard(Turtle):
             self.high_score = self.score
         self.score = 0
         self.update_scoreboard()
+        with open("snake_game/highscore.txt", mode="w") as file:
+            file.write(f"{self.high_score}")
 
     def update_scoreboard(self):
         self.clear()
