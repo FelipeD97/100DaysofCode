@@ -24,13 +24,11 @@ while len(guessed_states) < 50:
     capitalized_state = answer_state.title()
 
     if capitalized_state == "Exit":
-        missing_states = []
-        for state in all_states:
-            if state not in guessed_states:
-                missing_states.append(state)
-                new_data = pandas.DataFrame(missing_states)
-                new_data.to_csv(f"us-states-game-start/{player_name}StatesToLearn.csv")
+        missing_states = [state for state in all_states if state not in guessed_states]
+        new_data = pandas.DataFrame(missing_states)
+        new_data.to_csv(f"us-states-game-start/{player_name}StatesToLearn.csv")
         break
+
     if capitalized_state in all_states:
         correct_state = data[data.state == capitalized_state]
         state_name = turtle.Turtle()
