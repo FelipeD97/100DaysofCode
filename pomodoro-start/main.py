@@ -10,29 +10,63 @@ FONT_NAME = "Courier"
 WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
+reps = 0
+timer = None
 
 # ---------------------------- TIMER RESET ------------------------------- #
 
 
 def reset_timer():
+    global reps
+    reps = 0
+
+    window.after_cancel(timer)
     canvas.itemconfig(timer_text, text="00:00")
+    timer_heading.config(text="Timer")
+    checkmarks.config(text="")
 
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 def start_timer():
-    countdown(5 * 60)
+    global reps
+    reps += 1
+
+    work_sec = WORK_MIN * 60
+    short_break__sec = SHORT_BREAK_MIN * 60
+    long_break_sec = LONG_BREAK_MIN * 60
+
+    if reps % 2 == 0:
+        countdown(short_break__sec)
+        timer_heading.config(text="Short Break", fg=PINK)
+    elif reps % 8 == 0:
+        countdown(long_break_sec)
+        timer_heading.config(text="Long Break", fg=RED)
+    else:
+        countdown(work_sec)
+        timer_heading.config(text="Work", fg=GREEN)
 
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 
 
 def countdown(count):
+    global timer
 
     count_min = math.floor(count / 60)
     count_sec = count % 60
+    if count_sec < 10:
+        count_sec = f"0{count_sec}"
+
     canvas.itemconfig(timer_text, text=f"{count_min}:{count_sec}")
     if count > 0:
-        window.after(1000, countdown, count - 1)
+        timer = window.after(1000, countdown, count - 1)
+    else:
+        start_timer()
+        marks = ""
+        work_sessions = math.floor(reps / 2)
+        for _ in range(work_sessions):
+            marks += "✔"
+            checkmarks.config(text=marks)
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -58,7 +92,7 @@ start_button.grid(column=0, row=2)
 reset_button = Button(text="Reset", highlightthickness=0, command=reset_timer)
 reset_button.grid(column=2, row=2)
 
-checkmarks = Label(text="✔", bg=YELLOW, fg=GREEN)
+checkmarks = Label(bg=YELLOW, fg=GREEN)
 checkmarks.grid(column=1, row=3)
 
 window.mainloop()
