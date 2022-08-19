@@ -1,6 +1,3 @@
-from unicodedata import name
-
-
 class Animal:
     def __init__(self):
         self.number_eyes = 2
