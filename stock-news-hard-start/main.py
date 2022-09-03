@@ -48,7 +48,7 @@ else:
 
 diff_percent = round((stock_price_difference / float(yesterday_closing_price)) * 100)
 
-if abs(diff_percent) > 1:
+if abs(diff_percent) > 5:
     news_response = requests.get(NEWS_ENDPOINT, params=news_parameters)
     articles = news_response.json()["articles"]
     three_articles = articles[:3]
