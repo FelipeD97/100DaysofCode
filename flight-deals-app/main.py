@@ -3,6 +3,7 @@
 from data_manager import DataManager
 from flight_search import FlightSearch
 from notification_manager import NotificationManager
+from user_manager import UserManager
 from datetime import datetime, timedelta
 
 
@@ -10,6 +11,7 @@ data_manager = DataManager()
 sheet_data = data_manager.get_destination_data()
 flight_search = FlightSearch()
 notification_manager = NotificationManager()
+user_manager = UserManager()
 
 ORIGIN_CITY_IATA = "ATL"
 
@@ -27,7 +29,11 @@ for destination in sheet_data:
         ORIGIN_CITY_IATA, destination["iataCode"], tomorrow, six_month_from_today
     )
 
-if flight.price < destination["lowestPrice"]:
-    notification_manager.send_text(
-        message=f"Low price alert! Only ${flight.price} to fly from {flight.cityFrom} to {flight.cityTo}"
-    )
+    if flight is None:
+        continue
+
+    if flight.price < destination["lowestPrice"]:
+        notification_manager.send_text(
+            message=f"Low price alert! Only ${flight.price} to fly from {flight.cityFrom} to {flight.cityTo}"
+        )
+user_manager.create_user()

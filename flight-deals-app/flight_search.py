@@ -51,11 +51,12 @@ class FlightSearch:
             print(f"No flights for {toCityCode}")
             return None
         # pprint(f"{city}: {data[0]['price']}")
-        flight_data = FlightData(
-            cityFrom=data["route"][0]["cityFrom"],
-            cityTo=data["route"][0]["cityTo"],
-            nightsInDest=data["nightsInDest"],
-            price=data["price"],
-        )
-        # print(f"{flight_data.cityTo}: ${flight_data.price}")
-        return flight_data
+        else:
+            flight_data = FlightData(
+                cityFrom=data["route"][0]["cityFrom"],
+                cityTo=data["route"][0]["cityTo"],
+                nightsInDest=data["nightsInDest"],
+                price=data["price"],
+            )
+            # print(f"{flight_data.cityTo}: ${flight_data.price}")
+            return flight_data
