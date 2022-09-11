@@ -27,7 +27,7 @@ for destination in sheet_data:
         ORIGIN_CITY_IATA, destination["iataCode"], tomorrow, six_month_from_today
     )
 
-    if flight.price > destination["lowestPrice"]:
-        notification_manager.send_text(
-            message=f"Low price alert! Only ${flight.price} to fly from {flight.cityFrom} to {flight.cityTo}"
-        )
+if flight.price < destination["lowestPrice"]:
+    notification_manager.send_text(
+        message=f"Low price alert! Only ${flight.price} to fly from {flight.cityFrom} to {flight.cityTo}"
+    )

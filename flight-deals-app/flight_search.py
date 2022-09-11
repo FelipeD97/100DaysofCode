@@ -57,5 +57,5 @@ class FlightSearch:
             nightsInDest=data["nightsInDest"],
             price=data["price"],
         )
-        print(f"{flight_data.cityTo}: ${flight_data.price}")
+        # print(f"{flight_data.cityTo}: ${flight_data.price}")
         return flight_data
