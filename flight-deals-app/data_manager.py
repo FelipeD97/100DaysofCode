@@ -11,10 +11,12 @@ sheet_endpoint = os.environ["SHEET_ENDPOINT"]
 
 
 class DataManager:
-    # This class is responsible for talking to the Google Sheet.
+    # * This class is responsible for talking to the Google Sheet.
+
     def __init__(self):
         self.destination_data = {}
 
+    # ?
     def get_destination_data(self):
         response = requests.get(sheet_endpoint)
         data = response.json()

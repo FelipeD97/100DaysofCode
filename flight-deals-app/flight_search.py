@@ -1,7 +1,13 @@
 import requests
+from pprint import pprint
+from flight_data import FlightData
+from dotenv import load_dotenv
+import os
 
-KIWI_ENDPOINT = "https://tequila-api.kiwi.com"
-KIWI_API_KEY = "8aDhIHgnBzWFwJeSHz2v81jKr9Esvc2N"
+load_dotenv()
+
+KIWI_ENDPOINT = os.environ["KIWI_ENDPOINT"]
+KIWI_API_KEY = os.environ["KIWI_API_KEY"]
 
 
 class FlightSearch:
@@ -19,17 +25,37 @@ class FlightSearch:
 
         return code
 
+    def search_flights(self, fromCityCode, toCityCode, fromTime, toTime):
 
+        params = {
+            "fly_from": fromCityCode,
+            "fly_to": toCityCode,
+            "dateFrom": fromTime.strftime("%d/%m/%Y"),
+            "dateTo": toTime.strftime("%d/%m/%Y"),
+            "nights_in_dst_from": 7,
+            "nights_in_dst_to": 28,
+            "flight_type": "round",
+            "one_for_city": 1,
+            "max_stopovers": 0,
+            "curr": "usd",
+        }
 
-# flight_parameters = {
-#     "date_from": "09/09/2022",
-#     "date_to": "16/09/2022",
-#     "fly_from": "SFO",
-#     "fly_to": "LAX",
-# }
+        headers = {"apikey": KIWI_API_KEY}
 
-
-# response = requests.get(
-#     url=kiwi_endpoint, json=flight_parameters, headers=flight_header
-# )
-# print(response.text)
+        response = requests.get(
+            url=f"{KIWI_ENDPOINT}/search", params=params, headers=headers
+        )
+        try:
+            data = response.json()["data"][0]
+        except IndexError:
+            print(f"No flights for {toCityCode}")
+            return None
+        # pprint(f"{city}: {data[0]['price']}")
+        flight_data = FlightData(
+            cityFrom=data["route"][0]["cityFrom"],
+            cityTo=data["route"][0]["cityTo"],
+            nightsInDest=data["nightsInDest"],
+            price=data["price"],
+        )
+        print(f"{flight_data.cityTo}: ${flight_data.price}")
+        return flight_data
