@@ -1,0 +1,167 @@
+body {
+    margin: 0;
+    text-align: center;
+}
+
+h1 {
+    margin: 50px auto 0 auto;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 5.625rem;
+    color: #808c53;
+    line-height: 2;
+}
+
+h2 {
+    font-family: 'Qwitcher Grypen', cursive;
+    font-size: 2.5rem;
+    font-weight: normal;
+    color: #808c53;
+}
+
+h3, a {
+    color: #4c591b;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+hr {
+    border-style: dotted none none none;
+    border-width: 5px;
+    border-color: #ffc09093;
+    width: 5%;
+  }
+
+.top-container {
+    background-color: #D4A373;
+    padding-top: 100px;;
+    position: relative;
+}
+
+.middle-container {
+    background-color: #D4A373;
+    /* visibility: hidden; */
+}
+
+.bottom-container {
+    background-color: #808c53;
+}
+
+.top-cloud {
+    position: absolute;
+    top: 50px;
+    right: 300px;
+}
+
+.giphy-embed {
+    position: absolute;
+    right: 300px;
+    
+}
+
+.bottom-cloud {
+    position: absolute;
+    left: 300px;
+    bottom: 300px;
+}
+
+.my-pic {
+    border-radius: 50%;
+}
+
+.code-image {
+    border-radius: 50%;
+    float: left;
+    margin-right: 30px;
+    width: 25%;
+}
+
+.comic-image {
+    float: right;
+    margin-left: 30px;
+    width: 25%;
+}
+
+.skill-row {
+    display: inline-block;
+    padding: 20px;
+    width: 75px;
+}
+
+.footer-icon {
+    width: 50px;
+    padding: 20px
+}
+
+.new-skill-row {
+    width: 50%;
+    margin: 100px auto 100px auto;
+    text-align: left;
+    line-height: 2;
+}
+
+.btn {
+    background: #808c53;
+    background-image: -webkit-linear-gradient(top, #808c53, #4c591b);
+    background-image: -moz-linear-gradient(top, #808c53, #4c591b);
+    background-image: -ms-linear-gradient(top, #808c53, #4c591b);
+    background-image: -o-linear-gradient(top, #808c53, #4c591b);
+    background-image: linear-gradient(to bottom, #808c53, #4c591b);
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 8px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+}
+  
+.btn:hover {
+    background: #D4A373;
+    background-image: -webkit-linear-gradient(top, #D4A373, #ffc09093);
+    background-image: -moz-linear-gradient(top, #D4A373, #ffc09093);
+    background-image: -ms-linear-gradient(top, #D4A373, #ffc09093);
+    background-image: -o-linear-gradient(top, #D4A373, #ffc09093);
+    background-image: linear-gradient(to bottom, #D4A373, #ffc09093);
+    text-decoration: none;
+}
+
+.btn-container {
+    margin: 30px auto;
+}
+
+/* .hobbies-description-tag {
+    clear: right;
+} */
+
+
+/* .container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    background-color: grey;
+} */
+
+/* .fir-square {
+    background-color: red;
+    position: absolute;
+    right: 0;
+    height: 100px;
+    width: 100px;
+}
+
+.sec-square {
+    background-color: blue;
+    position: absolute;
+    top:0;
+    left: 100px;
+    height: 100px;
+    width: 100px;
+}
+
+.third-square {
+    background-color: yellow;
+    position: fixed;
+    top: 0;
+    height: 100px;
+    width: 100px;
+} */
