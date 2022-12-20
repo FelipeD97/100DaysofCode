@@ -1,0 +1,24 @@
+div {
+    height: 100px;
+    width: 100px;
+    border: 1px solid;
+    position: absolute;
+}
+
+.red {
+    background-color: lightcoral;
+    z-index: 1;
+}
+
+.purple {
+    background-color: plum;
+    left: 20px;
+    top: 20px;
+}
+
+.green {
+    background-color: lightgreen;
+    left: 40px;
+    top: 40px;
+    z-index: -1;
+}
