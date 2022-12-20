@@ -13,7 +13,15 @@ for post in posts:
 
 @app.route("/")
 def homepage():
-    return render_template("index.html")
+    return render_template("index.html", all_posts=post_objects)
+
+@app.route("/post/<int:blog_id>")
+def get_blog(blog_id):
+    requested_post = None
+    for blog_post in post_objects:
+        if blog_post.id == blog_id:
+            requested_post = blog_post
+    return render_template("post.html", blog=requested_post)
 
 @app.route("/about")
 def about_me():
@@ -22,5 +30,6 @@ def about_me():
 @app.route("/contact")
 def contact_me():
     return render_template("contact.html")
+
 if __name__ == '__main__':
     app.run(debug=True)
