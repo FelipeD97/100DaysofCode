@@ -10,7 +10,7 @@ def homepage():
 def receive_data():
     
     login = {
-        "name": request.form['name'],
+        "name": request.form['username'],
         "password": request.form['password']
     }
     return render_template ("login.html", login=login)
