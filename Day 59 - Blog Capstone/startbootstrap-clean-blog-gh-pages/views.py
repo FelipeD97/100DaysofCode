@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 from posts import Post
 import requests
 
@@ -31,6 +31,12 @@ def get_blog(blog_id):
 def about_me():
     return render_template("about.html")
 
-@views.route("/contact")
+@views.route("/contact", methods=["GET", "POST"])
 def contact_me():
-    return render_template("contact.html")
+    if request.method == 'POST':
+        data = request.form
+        print(data["name"])
+        return render_template ("contact.html", message="Successfully sent your message.") 
+    else:
+        return render_template ("contact.html", message="Contact Me")
+    
